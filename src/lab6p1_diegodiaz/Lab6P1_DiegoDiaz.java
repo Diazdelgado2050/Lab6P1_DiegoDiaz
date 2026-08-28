@@ -13,13 +13,11 @@ import java.util.Scanner;
  */
 public class Lab6P1_DiegoDiaz {
 
-    static Scanner leer = new Scanner(System.in);
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        Scanner leer = new Scanner(System.in);
         int opcion;
         do {
             System.out.println("\n==Menu de laboratorio 6==");
@@ -32,7 +30,7 @@ public class Lab6P1_DiegoDiaz {
 
             switch (opcion) {
                 case 1:
-                    carreraArreglos();
+                    carreraArreglos(leer);
                     break;
                 case 2:
                     System.out.println("Ejercicio 2 _ Cuantos Primos tienes?");
@@ -50,7 +48,7 @@ public class Lab6P1_DiegoDiaz {
 
     }
 
-    public static void carreraArreglos() {
+    public static void carreraArreglos(Scanner leer) {
 
         char jug1 = ' ';
         char jug2 = ' ';
@@ -69,7 +67,7 @@ public class Lab6P1_DiegoDiaz {
         }
         validar = false;
         while (!validar) {
-            System.out.println("Ingrese la letra para el segundo jugador:");
+            System.out.print("Ingrese la letra para el segundo jugador:");
             jug2 = leer.next().charAt(0);
             if (jug2 >= 'A' && jug2 <= 'Z') {
                 if (jug2 != jug1) {
@@ -80,44 +78,85 @@ public class Lab6P1_DiegoDiaz {
             } else {
                 System.out.println("Debe escoger una letra mayuscula valida. .");
             }
+        }
 
-            int longi = 0;
-            while (longi < 15 || longi > 20) {
-                System.out.println("Ingrese longitud de carrera (15 a 20)");
-                longi = leer.nextInt();
+        int longi = 0;
+        while (longi < 15 || longi > 20) {
+            System.out.println("Ingrese longitud de carrera (15 a 20)");
+            longi = leer.nextInt();
 
-            }
-            char[] arregloJug1 = new char[longi];
+        }
+        char[] arregloJug1 = new char[longi];
 
-            char[] arregloJug2 = new char[longi];
-            for (int i = 0; i < longi; i++) {
-                arregloJug1[i] = ' ';
-                arregloJug2[i] = ' ';
+        char[] arregloJug2 = new char[longi];
+        for (int i = 0; i < longi; i++) {
+            arregloJug1[i] = ' ';
+            arregloJug2[i] = ' ';
 
-            }
-            System.out.println("Comenzando la carrera...");
-            Random rnd = new Random();
-            int posicionJug1 = 0;
-            int posicionJug2 = 0;
-            int ronda = 0;
-            
-            while (posicionJug1 < longi && posicionJug2 < longi) {
+        }
+        System.out.println("Comenzando la carrera...");
+        Random rnd = new Random();
+        int posicionJug1 = 0;
+        int posicionJug2 = 0;
+        int ronda = 0;
+
+        while (posicionJug1 < longi && posicionJug2 < longi) {
             System.out.println("Ronda " + ronda);
-            
-            int mov1 = rnd.nextInt(5);
-            int mov2 = rnd.nextInt(5);
+
+            int mov1 = rnd.nextInt(5) + 1;
+            int mov2 = rnd.nextInt(5) + 1;
             System.out.println("El jugador " + jug1 + " se movio " + mov1 + " casillas!!");
             System.out.println("El jugador " + jug2 + " se movio " + mov2 + " casillas!!");
-            
-            
-            
-            
+            posicionJug1 += mov1;
+            if (posicionJug1 > longi) {
+                posicionJug1 = longi;
             }
+
+            posicionJug2 += mov2;
+            if (posicionJug2 > longi) {
+                posicionJug2 = longi;
+            }
+
+            actualizarArreglo(arregloJug1, jug1, posicionJug1);
+            actualizarArreglo(arregloJug2, jug2, posicionJug2);
+
+            System.out.println("Resultado actual:");
+            
+            printArray(arregloJug1);
+            printArray(arregloJug2);
+
+            ronda++;
+
+        }
+
+        System.out.println();
+        if (posicionJug1 >= longi && posicionJug2 >= longi) {
+            System.out.println("Es un empate!");
+        } else if (posicionJug1 >= longi) {
+            System.out.println("El jugador " + jug1 + " ha ganado!");
+        } else {
+            System.out.println("El jugador " + jug2 + " ha ganado!");
+        }
+
+    }
+
+    public static void actualizarArreglo(char[] arreglo, char letra, int limite) {
+        for (int i = 0; i < limite; i++) {
+            arreglo[i] = letra;
         }
     }
+
+    public static void printArray(char[] arreglo) {
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.print("[" + arreglo[i] + "]");
+
+        }
+    }
+
+    public static void printArray(int[] arreglo) {
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.print("["+arreglo[i]+"]");
+        }
+
+    }
 }
-1
-1
-
-    
-
