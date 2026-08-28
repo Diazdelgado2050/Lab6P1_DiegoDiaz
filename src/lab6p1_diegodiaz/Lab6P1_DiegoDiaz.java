@@ -33,10 +33,10 @@ public class Lab6P1_DiegoDiaz {
                     carreraArreglos(leer);
                     break;
                 case 2:
-                    System.out.println("Ejercicio 2 _ Cuantos Primos tienes?");
+                    System.out.println("DIEGO ACORDATE DE DARME LOS 0.5 PUNTOS EXTRA ,PLS BISMILAH, :) :# ");
                     break;
                 case 3:
-                    System.out.println("Ejercicio 3 - Rail Fence");
+                    Ejercicio3();
                     break;
                 case 4:
                     System.out.println("Fin... del...programa... :(");
@@ -102,6 +102,7 @@ public class Lab6P1_DiegoDiaz {
 
         while (posicionJug1 < longi && posicionJug2 < longi) {
             System.out.println("Ronda " + ronda);
+            System.out.println("");
 
             int mov1 = rnd.nextInt(5) + 1;
             int mov2 = rnd.nextInt(5) + 1;
@@ -121,7 +122,7 @@ public class Lab6P1_DiegoDiaz {
             actualizarArreglo(arregloJug2, jug2, posicionJug2);
 
             System.out.println("Resultado actual:");
-            
+
             printArray(arregloJug1);
             printArray(arregloJug2);
 
@@ -151,12 +152,105 @@ public class Lab6P1_DiegoDiaz {
             System.out.print("[" + arreglo[i] + "]");
 
         }
+        System.out.println("");
     }
 
-    public static void printArray(int[] arreglo) {
+    public static void printCArray(int[] arreglo) {
         for (int i = 0; i < arreglo.length; i++) {
-            System.out.print("["+arreglo[i]+"]");
+            System.out.print("[" + arreglo[i] + "]");
         }
 
     }
-}
+
+    public static void Ejercicio3() {
+        Scanner leer = new Scanner(System.in);
+        
+        
+        System.out.println("Ejercicio 3 - Rail Fence");
+        System.out.println("Ingrese la frase que le gustaria cifrar");
+        String palabras = leer.nextLine();
+        
+       
+        String frasepreparada = PrepararFrase(palabras);
+        System.out.println("Frase preparada: " + frasepreparada);
+
+   
+        char[] riel1 = new char[frasepreparada.length()];
+        char[] riel2 = new char[frasepreparada.length()];
+        char[] riel3 = new char[frasepreparada.length()];
+        
+        int contador1 = 0;
+        int contador2 = 0;
+        int contador3 = 0;        
+        
+        int actual = 0;
+        boolean bajar = true;
+        
+       for (int i = 0; i < frasepreparada.length(); i++) {
+            if (actual == 0) {
+                riel1[contador1] = frasepreparada.charAt(i);
+                contador1++;
+                bajar = true;
+            } else if (actual == 1) {
+                riel2[contador2] = frasepreparada.charAt(i);
+                contador2++;
+            } else if (actual == 2) {
+                riel3[contador3] = frasepreparada.charAt(i);
+                contador3++;
+                bajar = false;
+            }
+
+            if (bajar == true) {
+                actual++;
+            } else {
+                actual--;
+            }
+        }
+       
+       String cifrar = "";
+        for (int i = 0; i < contador1; i++) {
+            cifrar += riel1[i];
+        }
+            for (int i = 0; i < contador2; i++) {
+            cifrar += riel2[i];
+            }
+            for (int i = 0; i < contador3; i++) {
+            cifrar += riel3[i];
+        }
+            System.out.println("Texto Cifrado: " + cifrar);
+        
+        
+        
+        
+    }
+    
+    public static String PrepararFrase(String frase){
+        String resultado = "";
+        for (int i = 0; i < frase.length(); i++) {
+            char letra = frase.charAt(i);
+            if (letra != ' ') {
+                if (letra >= 'a' && letra <= 'z') {
+                    letra = (char)(letra - 32);
+                }
+                resultado += letra;
+            }
+        }
+        return resultado;
+    }
+        
+        
+        
+    }
+    
+
+        
+
+       
+
+                
+                    
+                    
+                    
+    
+
+
